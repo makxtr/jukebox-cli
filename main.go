@@ -1,0 +1,27 @@
+package main
+
+import (
+	"fmt"
+	"os"
+
+	"jukebox/cli/config"
+	"jukebox/cli/tui"
+
+	tea "github.com/charmbracelet/bubbletea"
+)
+
+func main() {
+	cfg, err := config.Load("./config/config.json")
+	if err != nil {
+		fmt.Printf("failed to load config: %v", err)
+		os.Exit(1)
+	}
+
+	model := tui.NewModel(cfg)
+
+	p := tea.NewProgram(model)
+	if _, err := p.Run(); err != nil {
+		fmt.Printf("Alas, there's been an error: %v", err)
+		os.Exit(1)
+	}
+}

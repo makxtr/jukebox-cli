@@ -1,0 +1,25 @@
+{
+  "songs": [
+    {
+      "id": 1,
+      "name": "Queen - Bohemian Rhapsody",
+      "price": 1.50
+    },
+    {
+      "id": 2,
+      "name": "AC/DC - Back In Black",
+      "price": 1.20
+    },
+    {
+      "id": 3,
+      "name": "Pink Floyd - Money",
+      "price": 2.00
+    },
+    {
+      "id": 4,
+      "name": "Led Zeppelin - Stairway to Heaven",
+      "price": 1.75
+    }
+  ],
+  "accepted_coins": [0.01, 0.05, 0.10, 0.25, 0.50, 1.00]
+}
