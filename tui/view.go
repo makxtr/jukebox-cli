@@ -24,8 +24,11 @@ func (m *Model) viewSongSelection() string {
 		cursor := " "
 		if m.cursor == i {
 			cursor = ">"
+			// Purple color
+			s += fmt.Sprintf("\x1b[35m%s %s (%.2f)\x1b[0m\n", cursor, song.Name, song.Price)
+		} else {
+			s += fmt.Sprintf("%s %s (%.2f)\n", cursor, song.Name, song.Price)
 		}
-		s += fmt.Sprintf("%s %s (%.2f)\n", cursor, song.Name, song.Price)
 	}
 	s += "\nPress q to quit.\n"
 	return s
