@@ -1,6 +1,7 @@
 package tui
 
 import (
+	"log"
 	"strconv"
 
 	tea "github.com/charmbracelet/bubbletea"
@@ -70,6 +71,14 @@ func (m *Model) handleCoinInput(msg tea.KeyMsg) (tea.Model, tea.Cmd) {
 		m.paymentInput = ""
 
 		if m.insertedAmount >= m.selectedSong.Price {
+			if m.analytics != nil {
+				go func() {
+					err := m.analytics.LogPlayback(m.cursor+1, m.insertedAmount)
+					if err != nil {
+						log.Printf("analytics error: %v", err)
+					}
+				}()
+			}
 			m.state = PlayingSong
 		}
 
@@ -88,7 +97,7 @@ func (m *Model) handleCoinInput(msg tea.KeyMsg) (tea.Model, tea.Cmd) {
 func (m *Model) handlePlayingSong(msg tea.KeyMsg) (tea.Model, tea.Cmd) {
 	switch msg.String() {
 	case "enter":
-		*m = *NewModel(m.config)
+		*m = *NewModel(m.config, m.analytics)
 		return m, nil
 	}
 	return m, nil
